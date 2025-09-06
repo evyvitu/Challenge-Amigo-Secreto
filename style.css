@@ -155,7 +155,7 @@ ul {
     margin: 20px 0;
 }
 
-/* Lista de amigos - cartão */
+/* Lista de amigos */
 .card-nome {
     display: flex;
     justify-content: space-between;
@@ -167,7 +167,7 @@ ul {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* Botão remover (somente tamanho menor + ícone) */
+/* Botão remover */
 .card-nome .remover {
     background: none;
     border: none;

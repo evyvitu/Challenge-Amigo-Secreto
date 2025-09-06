@@ -46,7 +46,7 @@ function atualizarLista() {
     });
 }
 
-// Rmover amigo pelo índice
+// Remover amigo pelo índice
 function removerAmigo(index) {
     amigos.splice(index, 1);
     atualizarLista();
