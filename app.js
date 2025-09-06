@@ -1,18 +1,31 @@
 let amigos = [];
 
+// Exibir mensagens de feedback
+function mostrarMensagem(texto, tipo = "info") {
+    const resultado = document.getElementById("resultado");
+    resultado.innerHTML = `<li class="${tipo}">${texto}</li>`;
+    setTimeout(() => resultado.innerHTML = "", 2500); // limpa mensagem depois de 2,5s
+}
+
 // Adicionar amigos
 function adicionarAmigo() {
     const input = document.getElementById("amigo");
     const nome = input.value.trim();
 
     if (nome === "") {
-        alert("Por favor, insira um nome.");
+        mostrarMensagem("⚠️ Por favor, insira um nome.", "erro");
+        return;
+    }
+
+    if (amigos.includes(nome)) {
+        mostrarMensagem("⚠️ Esse nome já foi adicionado.", "erro");
         return;
     }
 
     amigos.push(nome);
     input.value = "";
     atualizarLista();
+    mostrarMensagem("✅ Nome adicionado com sucesso!", "sucesso");
 }
 
 // Atualizar a lista de amigos na tela
@@ -20,24 +33,42 @@ function atualizarLista() {
     const lista = document.getElementById("listaAmigos");
     lista.innerHTML = "";
 
-    for (let i = 0; i < amigos.length; i++) {
+    amigos.forEach((amigo, index) => {
         const item = document.createElement("li");
-        item.textContent = amigos[i];
+        item.classList.add("card-nome");
+        item.innerHTML = `
+            ${amigo}
+            <button class="remover" onclick="removerAmigo(${index})">❌</button>
+        `;
         lista.appendChild(item);
-    }
+    });
+}
+
+// Rmover amigo pelo índice
+function removerAmigo(index) {
+    amigos.splice(index, 1);
+    atualizarLista();
+    mostrarMensagem("🗑️ Nome removido.", "sucesso");
 }
 
 // Sortear amigo secreto
 function sortearAmigo() {
-    const resultado = document.getElementById("resultado");
-
     if (amigos.length === 0) {
-        alert("A lista está vazia! Adicione ao menos um nome.");
+        mostrarMensagem("⚠️ A lista está vazia!", "erro");
         return;
     }
 
     const indiceAleatorio = Math.floor(Math.random() * amigos.length);
     const amigoSorteado = amigos[indiceAleatorio];
 
-    resultado.innerHTML = `<li>🎉 O amigo secreto é: <strong>${amigoSorteado}</strong></li>`;
+    const resultado = document.getElementById("resultado");
+    resultado.innerHTML = `<li class="sorteado">🎉 O amigo secreto é: <strong>${amigoSorteado}</strong></li>`;
+}
+
+// Resetar o jogo
+function resetarJogo() {
+    amigos = [];
+    document.getElementById("listaAmigos").innerHTML = "";
+    document.getElementById("resultado").innerHTML = "";
+    mostrarMensagem("🔄 Novo jogo iniciado!", "sucesso");
 }
