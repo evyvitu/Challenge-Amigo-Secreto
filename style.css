@@ -1,11 +1,11 @@
 :root {
-    --color-primary: #4B69FD;
-    --color-secondary: #FFF9EB;
-    --color-tertiary: #C4C4C4;
-    --color-button: #fe652b;
-    --color-button-hover: #e55720;
-    --color-text: #444444;
-    --color-white: #FFFFFF;
+    --color-primary: #28264C;      /* fundo principal / header */
+    --color-secondary: #E8EAE7;    /* fundo da seção de conteúdo */
+    --color-tertiary: #959EC9;     /* botões secundários ou detalhes */
+    --color-button: #FD5513;       /* botão principal (Sortear, Novo jogo) */
+    --color-button-hover: #fd7139; /* hover dos botões */
+    --color-text: #28264C;         /* texto padrão */
+    --color-white: #FFFFFF;        /* textos claros */
 }
 
 /* Estilos gerais */
@@ -17,10 +17,11 @@
 
 body {
     height: 100vh;
-    background-color: var(--color-primary);
+    background: var(--color-primary);
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: "Inter", sans-serif;
 }
 
 .main-content {
@@ -39,6 +40,19 @@ body {
     padding: 40px 0 0;
 }
 
+.main-title {
+    font-size: 48px;
+    font-family: "Merriweather", serif;
+    font-weight: 900;
+    font-style: italic;
+    color: var(--color-white);
+}
+
+.header-banner img {
+    max-width: 300px;
+    margin-top: 10px;
+}
+
 /* Seção de entrada */
 .input-section {
     flex: 60%;
@@ -52,15 +66,6 @@ body {
     width: 100%;
 }
 
-/* Títulos */
-.main-title {
-    font-size: 48px;
-    font-family: "Merriweather", serif;
-    font-weight: 900;
-    font-style: italic;
-    color: var(--color-white);
-}
-
 .section-title {
     font-family: "Inter", serif;
     font-size: 36px;
@@ -70,7 +75,7 @@ body {
     text-align: center;
 }
 
-/* Contêineres de entrada e botão */
+/* Contêiner de entrada */
 .input-wrapper {
     display: flex;
     justify-content: center;
@@ -87,24 +92,7 @@ body {
     font-size: 16px;
 }
 
-.button-container {
-    width: 300px;
-    justify-content: center;
-}
-
-/* Estilos de entrada de texto */
-.input-title {
-    flex: 1;
-    padding: 10px 15px;
-    font-size: 16px;
-    border: 2px solid #333;
-    border-right: none;
-    border-radius: 25px 0 0 25px;
-    font-family: "Merriweather", serif;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-/* Estilos de botão */
+/* Botões */
 button {
     padding: 15px 30px;
     font-family: "Inter", sans-serif;
@@ -119,10 +107,43 @@ button {
     background-color: var(--color-tertiary);
     color: var(--color-text);
     border-radius: 0 25px 25px 0;
+    font-weight: bold;
 }
 
 .button-add:hover {
     background-color: #a1a1a1;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    width: 300px;
+}
+
+/* Botão sortear e novo jogo */
+.button-draw {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 40px;
+    color: var(--color-white);
+    background-color: var(--color-button);
+    font-size: 16px;
+    border: none;
+    border-radius: 25px;
+    transition: background 0.3s;
+}
+
+.button-draw img {
+    margin-right: 8px;
+    width: 24px;
+    height: 24px;
+}
+
+.button-draw:hover {
+    background-color: var(--color-button-hover);
 }
 
 /* Listas */
@@ -134,34 +155,7 @@ ul {
     margin: 20px 0;
 }
 
-.result-list {
-    margin-top: 15px;
-    color: #05DF05;
-    font-size: 22px;
-    font-weight: bold;
-    text-align: center;
-}
-
-/* Botão de sortear título */
-.button-draw {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 10px 40px;
-    color: var(--color-white);
-    background-color: var(--color-button);
-    font-size: 16px;
-}
-
-.button-draw img {
-    margin-right: 40px;
-}
-
-.button-draw:hover {
-    background-color: var(--color-button-hover);
-}
-
-/* Cartões da lista */
+/* Lista de amigos - cartão */
 .card-nome {
     display: flex;
     justify-content: space-between;
@@ -173,21 +167,43 @@ ul {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* Botão remover */
-.remover {
+/* Botão remover (somente tamanho menor + ícone) */
+.card-nome .remover {
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 18px;
-    color: red;
+    padding: 0;
+    margin-left: 10px;
+    vertical-align: middle;
 }
 
-/* Estilo de mensagens */
+.card-nome .remover img {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    transition: transform 0.2s;
+}
+
+.card-nome .remover img:hover {
+    transform: scale(1.2);
+}
+
+/* Mensagens */
+.result-list {
+    margin-top: 15px;
+    color: #05DF05;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+}
+
 #resultado li {
-    font-family: "Inter", sans-serif;
-    margin-top: 10px;
-    padding: 8px;
-    border-radius: 8px;
+    padding: 10px;
+    border-radius: 12px;
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: 500;
+    animation: fadeIn 0.3s ease;
 }
 
 #resultado .erro {
@@ -205,4 +221,10 @@ ul {
     color: #333;
     font-weight: bold;
     font-size: 20px;
+    text-align: center;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
 }
